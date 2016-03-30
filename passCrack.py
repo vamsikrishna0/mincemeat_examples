@@ -37,7 +37,7 @@ def mapfn(k, v):
       p = hashlib.md5(i).hexdigest()      
       if p[:5] == v[-1]:
         print p[:5]
-        yield "found", i    
+        yield "actual", i    
 
 #Reduce function
 def reducefn(k, vs):

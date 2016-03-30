@@ -15,7 +15,7 @@ i ,j = 0, 0
 for line in f:
    if line.strip(): 
        i = i +1
-       if i%10 == 0:
+       if i%100 == 0:
          j = j+1
        if j in data:
          data[j].append(line)
@@ -56,7 +56,10 @@ s.reducefn = reducefn
 add = s.run_server(password="changeme")
 
 #Standard deviation formula
-stddev = math.sqrt((add["sum_sq"]/add["count"]) - ((add["sum"]/add["count"]) ** 2))
+#Note: The conversion of float is to avoid integer division
+mean = float(add["sum"])/add["count"]
+
+stddev = math.sqrt((float(add["sum_sq"])/add["count"]) - (mean * mean))
 add["stddev"] = stddev
 del add["sum_sq"]
 
